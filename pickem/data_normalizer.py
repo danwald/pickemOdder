@@ -1,10 +1,9 @@
-import abc
-from abc import ABC
+from abc import ABC, abstractmethod
 import json
 
 
 class DataNormalizer(ABC):
-    @abc.abstractmethod
+    @abstractmethod
     def normalize_data(self):
         pass
 
