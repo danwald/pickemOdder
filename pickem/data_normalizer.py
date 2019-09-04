@@ -5,6 +5,8 @@ import json
 class DataNormalizer(ABC):
     @abstractmethod
     def normalize_data(self):
+    '''Trys all the data sources and returns a generator in csv of
+       SPORT, EVENT_TIME, HOME-TEAM, AWAY-TEAM, HOME-WIN, AWAY-WIN'''
         pass
 
 
