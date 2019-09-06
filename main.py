@@ -12,9 +12,9 @@ def main():
     ap.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
 
     args = ap.parse_args()
-    data = get_normed_data(args['infile'])
+    data = get_normed_data(args.infile)
     if data:
-        args['outfile'].write(data)
+        args.outfile.write(data)
     return 0
 
 
