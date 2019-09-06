@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from pkg_resources import resource_string
 import argparse
 import sys
 
