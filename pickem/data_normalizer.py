@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import json
 import datetime
+import pytz
 
 
 class DataNormalizer(ABC):
@@ -19,11 +20,13 @@ class OddsAPIData(DataNormalizer):
     # Uses stats from https://the-odds-api.com/
     def __init__(self):
         self.data = None
+        self.utc = pytz.timezone('UTC')
 
     def normalize_data(self, infile_stream):
         if not self.data:
             self.data = json.load(infile_stream)
         csv = []
+        csv.append(self.get_header())
         self.data = self.data['data']
         for game in self.data:
             sport = game['sport_key']
