@@ -14,7 +14,8 @@ def main():
     args = ap.parse_args()
     data = get_normed_data(args.infile)
     if data:
-        args.outfile.write(data)
+        for row in data:
+            args.outfile.write(str(row))
     return 0
 
 
