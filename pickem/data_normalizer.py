@@ -36,7 +36,7 @@ class OddsAPIData(DataNormalizer):
                 away_win = 1/booky['odds']['h2h'][away_index]*100
                 updated = datetime.datetime.fromtimestamp(booky['last_update'])
                 csv.append([ sport, kick_off, home, away, home_win, away_win, site, updated])
-                return csv
+            return csv
 
     def get_team_indices(self, teams, home_team):
         for index, team in enumerate(teams):
