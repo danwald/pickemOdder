@@ -5,7 +5,7 @@ import pytz
 
 
 class DataNormalizer(ABC):
-    def get_header():
+    def get_header(self):
         return "sport, event_time, home-team, away-team, home-win, away-win, booky, updated"
 
     @abstractmethod
@@ -32,13 +32,13 @@ class OddsAPIData(DataNormalizer):
             sport = game['sport_key']
             home_index, away_index = self.get_team_indices(game['teams'], game['home_team'])
             home, away = game['teams'][home_index], game['teams'][away_index]
-            kick_off = datetime.datetime.fromtimestamp(game['commence_time'])
+            kick_off = datetime.datetime.fromtimestamp(game['commence_time'], self.utc)
             for booky in game['sites']:
                 site = booky['site_key']
                 home_win = 1/booky['odds']['h2h'][home_index]*100
                 away_win = 1/booky['odds']['h2h'][away_index]*100
-                updated = datetime.datetime.fromtimestamp(booky['last_update'])
-                csv.append([ sport, kick_off, home, away, home_win, away_win, site, updated])
+                updated = datetime.datetime.fromtimestamp(booky['last_update'], self.utc)
+                csv.append([sport, str(kick_off), home, away, home_win, away_win, site, str(updated)])
         return csv
 
     def get_team_indices(self, teams, home_team):
