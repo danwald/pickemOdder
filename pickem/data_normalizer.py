@@ -4,6 +4,9 @@ import datetime
 
 
 class DataNormalizer(ABC):
+    def get_header():
+        return "sport, event_time, home-team, away-team, home-win, away-win, booky, updated"
+
     @abstractmethod
     def normalize_data(self, infile_stream):
         """Trys all the data sources and returns a generator in csv of
@@ -19,7 +22,7 @@ class OddsAPIData(DataNormalizer):
 
     def normalize_data(self, infile_stream):
         if not self.data:
-            self.data = json.load(self.infile_stream)
+            self.data = json.load(infile_stream)
         csv = []
         self.data = self.data['data']
         for game in self.data:
