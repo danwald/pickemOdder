@@ -5,29 +5,21 @@ import datetime
 
 class DataNormalizer(ABC):
     @abstractmethod
-    def normalize_data(self):
-    """Trys all the data sources and returns a generator in csv of SPORT, EVENT_TIME, HOME-TEAM, AWAY-TEAM, HOME-WIN, AWAY-WIN, BOOKY, UPDATED"""
+    def normalize_data(self, infile_stream):
+        """Trys all the data sources and returns a generator in csv of
+        SPORT, EVENT_TIME, HOME-TEAM, AWAY-TEAM, HOME-WIN, AWAY-WIN, BOOKY, UPDATED
+        """
         pass
 
 
-class MirrorData(DataNormalizer):
-    def __init__(self, infile_stream):
-        self.infile_stream = infile_stream
-        self.data = None
-
-    def normalize_data(self):
-        if not self.data:
-            self.data = json.loads(self.infile_stream)
-        return self.data
-
-
-class OddsAPIData(MirrorData):
+class OddsAPIData(DataNormalizer):
     # Uses stats from https://the-odds-api.com/
     def __init__(self, infile_stream):
-        super(infile_stream):
+        self.data = None
 
     def normalize_data(self, infile_stream):
-        super().normalize_data(infile_stream)
+        if not self.data:
+            self.data = json.load(self.infile_stream)
         csv = []
         self.data = self.data['data']
         for game in self.data:
@@ -42,7 +34,7 @@ class OddsAPIData(MirrorData):
                 csv.append([ sport, kick_off, home, away, home_win, away_win, site, updated])
                 return csv
 
-    def get_team_indices(teams, home_team):
+    def get_team_indices(self, teams, home_team):
         for index, team in enumerate(teams):
             if team == home_team:
                 home = index
@@ -53,15 +45,16 @@ class OddsAPIData(MirrorData):
 
 
 
-DATA_SOURCES = (MirrorData, OddsAPIData,)
+DATA_SOURCES = (OddsAPIData,)
 
 
 def get_normed_data(infile_stream):
     for src in DATA_SOURCES:
         try:
             infile_stream.seek(0)
-            return src(infile_stream).normalize_data()
-        except Exception:
+            return src().normalize_data(infile_stream)
+        except Exception as e:
+            print(e)
             pass
     else:
         print('Didn\'t parse')
