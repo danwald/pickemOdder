@@ -14,7 +14,7 @@ class DataNormalizer(ABC):
 
 class OddsAPIData(DataNormalizer):
     # Uses stats from https://the-odds-api.com/
-    def __init__(self, infile_stream):
+    def __init__(self):
         self.data = None
 
     def normalize_data(self, infile_stream):
@@ -24,6 +24,7 @@ class OddsAPIData(DataNormalizer):
         self.data = self.data['data']
         for game in self.data:
             sport = game['sport_key']
+            home_index, away_index = self.get_team_indices(game['teams'], game['home_team'])
             home, away = game['teams'][home_index], game['teams'][away_index]
             kick_off = datetime.datetime.fromtimestamp(game['commence_time'])
             for booky in game['sites']:
