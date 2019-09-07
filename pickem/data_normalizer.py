@@ -6,7 +6,7 @@ import pytz
 
 class DataNormalizer(ABC):
     def get_header(self):
-        return "sport, event_time, home_team, away_team, home_win, away_win, booky, updated"
+        return 'sport,event_time,home_team,away_team,home_win,away_win,booky,updated'
 
     @abstractmethod
     def normalize_data(self, infile_stream):
