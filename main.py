@@ -12,12 +12,15 @@ def main():
     ap.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
     ap.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
 
+    import ipdb; ipdb.set_trace();
     args = ap.parse_args()
     data = get_normed_data(args.infile)
     if not data:
         return -1
 
-    df = pandas.DataFrame.from_records(data[1:], columns=data[0].split(','))
+    header = data[0].split(',')
+    df = pandas.DataFrame.from_records(data[1:], columns=header)
+    games = df.groupby(by=header[:4])
     df.to_csv(args.outfile)
     return 0
 
