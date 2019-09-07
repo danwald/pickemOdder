@@ -12,7 +12,6 @@ def main():
     ap.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
     ap.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
 
-    import ipdb; ipdb.set_trace();
     args = ap.parse_args()
     data = get_normed_data(args.infile)
     if not data:
