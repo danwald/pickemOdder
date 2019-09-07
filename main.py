@@ -3,6 +3,8 @@
 import argparse
 import sys
 
+import pandas
+
 from pickem.data_normalizer import get_normed_data
 
 def main():
@@ -12,9 +14,11 @@ def main():
 
     args = ap.parse_args()
     data = get_normed_data(args.infile)
-    if data:
-        for row in data:
-            args.outfile.write(str(row))
+    if not data:
+        return -1
+
+    df = pandas.DataFrame(data=data[1:], columns=data[0])
+    df.to_csv(args.outfile)
     return 0
 
 
