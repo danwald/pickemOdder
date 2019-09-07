@@ -17,7 +17,7 @@ def main():
     if not data:
         return -1
 
-    df = pandas.DataFrame(data=data[1:], columns=data[0])
+    df = pandas.DataFrame.from_records(data[1:], columns=data[0].split(','))
     df.to_csv(args.outfile)
     return 0
 
