@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #!/usr/bin/env python
 
 import argparse
@@ -5,7 +7,7 @@ import sys
 
 import pandas
 
-from data_normalizer import get_normed_data
+from pickemOdder import get_normed_data
 
 def main():
     ap = argparse.ArgumentParser(description='Parse input game stats and output rank orderd picks')
