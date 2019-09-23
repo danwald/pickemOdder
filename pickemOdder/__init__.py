@@ -1,6 +1,3 @@
-
-# -*- coding: utf-8 -*-
-
 """Top-level package for pickemOdder."""
 
 __author__ = """danny crasto"""
