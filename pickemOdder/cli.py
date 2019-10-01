@@ -7,11 +7,15 @@ import pandas
 
 from pickemOdder import get_normed_data
 
-def get_sorted_wins_dataframe(data):
+def get_sorted_wins_dataframe(data, win_percentage_cut_off=50):
     header = data[0].split(',')
     df = pandas.DataFrame.from_records(data[1:], columns=header)
-    games = df.groupby(by=header[:4])
-    return games
+    return (
+        df
+        .groupby(by=header[:4])
+        .mean()
+        .sort_values('away_win', ascending=False)
+    )
 
 def main():
     ap = argparse.ArgumentParser(description='Parse input game stats and output rank orderd picks')
