@@ -26,7 +26,7 @@ def main():
     data = get_normed_data(args.infile)
     if not data:
         return -1
-    get_sorted_wins_dataframe(data).to_csv(args.outfile)
+    args.outfile.write(str(get_sorted_wins_dataframe(data)))
     return 0
 
 
