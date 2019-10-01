@@ -18,7 +18,7 @@ def get_sorted_wins_dataframe(data, win_percentage_cut_off=50):
     )
 
 def main():
-    ap = argparse.ArgumentParser(description='Parse input game stats and output rank orderd picks')
+    ap = argparse.ArgumentParser(description='Parse input game stats and output rank orderd picks ordered by away_wins')
     ap.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
     ap.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
 
