@@ -7,6 +7,12 @@ import pandas
 
 from pickemOdder import get_normed_data
 
+def get_sorted_wins_dataframe(data):
+    header = data[0].split(',')
+    df = pandas.DataFrame.from_records(data[1:], columns=header)
+    games = df.groupby(by=header[:4])
+    return games
+
 def main():
     ap = argparse.ArgumentParser(description='Parse input game stats and output rank orderd picks')
     ap.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
@@ -16,12 +22,9 @@ def main():
     data = get_normed_data(args.infile)
     if not data:
         return -1
-
-    header = data[0].split(',')
-    df = pandas.DataFrame.from_records(data[1:], columns=header)
-    games = df.groupby(by=header[:4])
-    df.to_csv(args.outfile)
+    get_sorted_wins_dataframe(data).to_csv(args.outfile)
     return 0
+
 
 
 if __name__ == '__main__':
