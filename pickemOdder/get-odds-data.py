@@ -11,6 +11,7 @@ import requests
 HOST = 'https://api.the-odds-api.com'
 PATH = '/v3/odds'
 
+
 def get_url(key):
     params = urllib.parse.urlencode({
         'sport': 'americanfootball_nfl',
@@ -20,12 +21,13 @@ def get_url(key):
     })
     return f'{HOST}{PATH}/?{params}'
 
+
 def main():
     ap = argparse.ArgumentParser(description=f'gets odds data from {HOST}')
     ap.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
     ap.add_argument(
         '-k', '--key', help='api key for odds api', type=str,
-        default=os.environ.get('ODDS_API_KEY','')
+        default=os.environ.get('ODDS_API_KEY', '')
     )
 
     args = ap.parse_args()
@@ -43,11 +45,7 @@ def main():
         json.dump(response.json(), args.outfile)
         used, remain = response.headers['x-requests-used'], response.headers['x-requests-remaining']
         sys.stderr.write(f'{used} of {remain} api requests remain')
-
-
-
     return 0
-
 
 
 if __name__ == '__main__':
