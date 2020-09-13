@@ -5,21 +5,34 @@ reads weekly game data from currently a single source (https://the-odds-api.com)
 
 # Development requirements
 - python3
-- pipenv
+- virtualenv
 
 # Installing
 
-Currently in developement so I have't added (fixed) the pip console_scripts cli. So just
+It's still in development so local install into a virtualenv
 
 ```bash
 git clone https://github.com/danwald/pickemOdder.git
 cd pickemOdder
-pipenv shell
-pipenv install --dev 
+mkvirtualenv pickem
+workon pickem
+pip install -e .
 ```
 
-# Running tests
+# Running
+## Getting data
 
-After installing testing requirements inside `requirements/python/testing.txt`, you can run all tests, by running this command
+This pulls data from the-odds-api.com for the upcoming week. Set `ODDS_API_KEY` with your api key and save the output to a file
+
+`python pickemOdder/get-odds-data.py > out.json`
+
+## Sorting the data
+
+__by away win %__
+
+`python pickemOdder/cli.py < out.json`
+
+
+# Running tests
 
 > make test
