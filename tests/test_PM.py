@@ -15,7 +15,7 @@ class TestPm(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures, if any."""
         with open('tests/data/nfl-data.json') as fp:
-            df = pickemOdder.get_normed_data(fp)
+            pickemOdder.get_normed_data(fp)
 
     def tearDown(self):
         """Tear down test fixtures, if any."""
