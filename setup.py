@@ -35,7 +35,7 @@ setup(
     entry_points={
         'console_scripts': [
             'pickemOdder=pickemOdder.cli:main',
-            'getOddsData=pickemOdder.get_odds_data:main',
+            'getOddsData=pickemOdder.getoddsdata:main',
         ],
     },
     install_requires=requirements,
