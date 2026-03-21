@@ -23,6 +23,24 @@ Parse input game stats and output rank orderd picks
 * Documentation: https://pickemOdder.readthedocs.io.
 
 
+Installation
+------------
+
+To install as a dependency in another project::
+
+    uv add pickemOdder
+
+To set up the project locally for development::
+
+    uv sync
+
+Running Tests
+-------------
+
+::
+
+    uv run pytest
+
 Features
 --------
 
