@@ -5,26 +5,37 @@ reads weekly game data from currently a single source (https://the-odds-api.com)
 
 # Development requirements
 - python3
-- virtualenv
+- [uv](https://docs.astral.sh/uv/)
 
 # Installing
 
+To install as a dependency in another project:
+
 ```bash
-pjp install pickemOdder
+uv add pickemOdder
 ```
+
+To set up the project locally for development:
+
+```bash
+uv sync
+```
+
 # Running
 ## Getting data
 
 This pulls data from the-odds-api.com for the upcoming week. Set `ODDS_API_KEY` with your api key and save the output to a file
 
-`getOddsData > out.json`
+`uv run getOddsData > out.json`
 
 ## Sorting the data
 
 __by away win %__
 
-`pickemOdder < out.json`
+`uv run pickemOdder < out.json`
 
 # Running tests
 
-> make test
+```bash
+uv run pytest
+```
