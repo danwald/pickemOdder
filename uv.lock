@@ -258,13 +258,13 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pandas", specifier = ">=3.0.1" },
-    { name = "pytz", specifier = ">=2026.1.post1" },
-    { name = "requests", specifier = ">=2.32.5" },
+    { name = "pandas" },
+    { name = "pytz" },
+    { name = "requests" },
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=9.0.2" }]
+dev = [{ name = "pytest" }]
 
 [[package]]
 name = "pluggy"
